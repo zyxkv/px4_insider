@@ -1,0 +1,48 @@
+# PX4 推荐参数配置 - MicoAir743v2 + MTF01
+
+## 串口配置
+MAV_1_CONFIG = 102    # TELEM2 (UART4) - MTF01 连接端口
+MAV_1_MODE = Normal
+SER_TEL3_BAUD = 115200  # 8N1 - MTF01 波特率
+
+## uXRCE-DDS 配置
+UXRCE_DDS_CFG = 1      # Serial0 (USB) - 用于数据传输
+UXRCE_DDS_DOM_ID = 0   # DDS Domain ID
+UXRCE_DDS_KEY = 1      # Session Key
+
+## EKF2 光流配置
+EKF2_OF_CTRL = 1       # 启用光流融合
+EKF2_RNG_CTRL = 1      # 启用测距融合
+EKF2_HGT_REF = 3       # 使用距离传感器作为高度参考
+SENS_FLOW_ROT = 0      # 光流无旋转 (根据实际安装调整)
+
+## EKF2 辅助配置
+EKF2_AID_MASK = 2      # use optical flow
+EKF2_RNG_AID = 1       # Range aid enable
+
+## 磁力计配置 (如需禁用板载罗盘)
+# CAL_MAG0_PRIO = -1   # 禁用板载磁力计
+
+## 传感器采样频率 (可选调整)
+# SENS_IMU_MODE = 0
+# SENS_BARO_MODE = 0
+
+## 说明
+# ============
+# 1. MAV_1_CONFIG 值对应:
+#    0 = 禁用
+#    1 = TELEM1 (UART1)
+#    2 = TELEM2 (UART3) - 实际端口号可能不同
+#    ...
+#    102 = TELEM2 (根据实际串口映射调整)
+#
+# 2. SER_TELn_BAUD 值对应:
+#    115200 = 115200 8N1
+#    921600 = 921600 8N1 (高速)
+#
+# 3. SENS_FLOW_ROT 值对应:
+#    0 = No rotation
+#    1 = Yaw 45°
+#    2 = Yaw 90°
+#    ...
+#    24 = Yaw 315°
