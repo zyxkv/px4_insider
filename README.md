@@ -2,7 +2,18 @@
 
 ## Quick Start
 
-### 1. Install Dependencies (Ubuntu 22.04)
+### 1. Clone Repository
+
+```bash
+# Clone with submodules
+git clone --recurse-submodules https://github.com/zyxkv/px4_insider.git
+cd px4_insider
+
+# If already cloned without submodules, initialize them
+git submodule update --init --recursive
+```
+
+### 2. Install Dependencies (Ubuntu 22.04)
 
 ```bash
 # Run automatic setup
@@ -11,7 +22,7 @@ chmod +x scripts/setup_px4_env.sh
 ./scripts/setup_px4_env.sh
 ```
 
-### 2. Manual Installation
+### 3. Manual Installation
 
 ```bash
 # System dependencies
@@ -26,15 +37,6 @@ sudo apt install -y ./PX4-toolchain-0.24-linux-x64.deb
 
 # Python dependencies
 pip3 install --user pyserial pandas toml numpy
-```
-
-### 3. Clone PX4 Source
-
-```bash
-cd ~/projects/px4_insider
-git clone --depth 1 --branch v1.14.3 https://github.com/PX4/PX4-Autopilot.git
-cd PX4-Autopilot
-git submodule update --init --recursive
 ```
 
 ### 4. Build Firmware
@@ -61,10 +63,13 @@ make micoair_h743-v2_default
 
 ```
 px4_insider/
-├── PX4-Autopilot/              # PX4 source (v1.14.3)
+├── PX4-Autopilot/              # PX4 source (v1.14.3 submodule)
 │   └── boards/micoair/h743-v2/ # Board config
+├── MicoAir743V2-Manual/        # Hardware manual and images
+├── config/
+│   └── px4_params.txt          # PX4 parameters
 ├── docs/
-│   ├── px4_dev_setup.md        # This file
+│   ├── px4_dev_setup.md
 │   ├── micoair743_config_guide.md
 │   └── uxrce_dds_research.md
 └── scripts/
@@ -72,6 +77,8 @@ px4_insider/
     ├── start_uxrce_agent.sh
     └── setup_sensors.sh
 ```
+
+**Note:** PX4-Autopilot is included as a git submodule pointing to v1.14.3. When cloning this repository, use `--recurse-submodules` flag or run `git submodule update --init --recursive` after cloning.
 
 ## Troubleshooting
 
